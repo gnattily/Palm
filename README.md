@@ -5,3 +5,4 @@ Automatically finds and deletes messages deemed to be toxic using the [perspecti
 ## TODO:
 - Make a function to analyze the inputted message
 - Put that in a discord bot
+- name it palm like a gangsta

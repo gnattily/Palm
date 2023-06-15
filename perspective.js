@@ -4,8 +4,8 @@ const axios = require('axios').default;
 
 /**
  * Gets scores for the supplied attributes
- * @param {string} message - The message to analyze
- * @param {array} attributes - What to analyze the message for
+ * @param {String} message - The message to analyze
+ * @param {String[]} attributes - What to analyze the message for
  * @returns {Promise} The attributes requested and their scores
  */
 async function getScores(message, attributes) {
