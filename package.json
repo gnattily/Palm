@@ -4,7 +4,10 @@
   "description": "A discord bot using the Perspective API to delete toxic messages.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node .",
+    "update": "node update-commands.js",
+    "lint": "eslint ."
   },
   "keywords": [
     "javascript",
