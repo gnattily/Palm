@@ -8,6 +8,7 @@ require('dotenv').config();
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
+const colors = require('./colors');
 
 const client = new Client({
 	intents: [
@@ -31,7 +32,7 @@ for (const folder of commandFolders) {
 		if ('data' in command && 'execute' in command) {
 			client.commands.set(command.data.name, command);
 		} else {
-			console.log(`[WARNING] The command at .\\commands\\${folder}\\${file} is missing a required "data" or "execute" property.`);
+			console.log(`${colors.FgGray}[${colors.FgYellow}WARNING${colors.FgGray}]${colors.Reset} The command at .\\commands\\${folder}\\${file} is missing a required "data" or "execute" property.`);
 		}
 	}
 }

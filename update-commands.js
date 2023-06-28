@@ -2,6 +2,7 @@ require('dotenv').config();
 const { REST, Routes } = require('discord.js');
 const fs = require('node:fs');
 const path = require('node:path');
+const colors = require('./colors');
 
 const commands = [];
 // Grab all the command files from the commands directory you created earlier
@@ -19,7 +20,7 @@ for (const folder of commandFolders) {
 		if ('data' in command && 'execute' in command) {
 			commands.push(command.data.toJSON());
 		} else {
-			console.log(`[WARNING] The command at .\\commands\\${folder}\\${file} is missing a required "data" or "execute" property.`);
+			console.log(`${colors.FgGray}[${colors.FgYellow}WARNING${colors.FgGray}]${colors.Reset} The command at ${colors.Underscore}.\\commands\\${folder}\\${file}${colors.Reset} is missing a required "data" or "execute" property.`);
 		}
 	}
 }
@@ -30,7 +31,7 @@ const rest = new REST().setToken(process.env.DISCORD_TOKEN);
 // and deploy your commands!
 (async () => {
 	try {
-		console.log(`Started refreshing ${commands.length} application (/) commands.`);
+		console.log(`   ${colors.FgGray}[${colors.FgBlue}${colors.Bright}INFO${colors.FgGray}] Started refreshing {commands.length} application (/) commands.${colors.Reset}`);
 
 		// The put method is used to fully refresh all commands in the guild with the current set
 		const data = await rest.put(
@@ -38,7 +39,7 @@ const rest = new REST().setToken(process.env.DISCORD_TOKEN);
 			{ body: commands },
 		);
 
-		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
+		console.log(`   ${colors.FgGray}[${colors.FgBlue}${colors.Bright}INFO${colors.FgGray}] Successfully reloaded ${data.length} application (/) commands.${colors.Reset}`);
 	} catch (error) {
 		// And of course, make sure you catch and log any errors!
 		console.error(error);
