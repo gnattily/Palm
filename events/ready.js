@@ -1,10 +1,10 @@
 const { Events } = require('discord.js');
-const colors = require('../colors');
+const out = require('../out');
 
 module.exports = {
 	name: Events.ClientReady,
 	once: true,
 	execute(client) {
-		console.log(`   ${colors.FgGray}[${colors.FgBlue}${colors.Bright}INFO${colors.FgGray}] Logged in as ${colors.Underscore}${client.user.tag}${colors.Reset}`);
+		out.info(`Logged in as ${out.colors.Underscore}${client.user.tag}${out.colors.Reset}`);
 	},
 };

@@ -30,7 +30,7 @@ async function getScores(message, attributes) {
 
 	}
 	catch (error) {
-		console.log(error);
+		console.error(error);
 	}
 }
 

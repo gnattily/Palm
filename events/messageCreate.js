@@ -5,8 +5,9 @@ module.exports = {
 	name: Events.MessageCreate,
 	once: false,
 	async execute(message) {
-		const attributes = ['TOXICITY', 'SEXUALLY_EXPLICIT', 'INSULT'];
+		if (message.author.bot) return;
 
+		const attributes = ['TOXICITY', 'SEXUALLY_EXPLICIT', 'INSULT'];
 		const scores = await perspective.getScores(message.content, attributes);
 
 		let highest = 0;
