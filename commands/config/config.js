@@ -2,7 +2,7 @@ const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const out = require('../../out');
 
 async function execute(interaction) {
-	await interaction.deferReply();
+	await interaction.deferReply({ ephemeral: true });
 	const subcommand = interaction.options.getSubcommand();
 
 	try {
