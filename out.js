@@ -34,8 +34,8 @@ module.exports.colors = {
  * @returns undefined
  */
 module.exports.warn = (message) => {
-	//           gray     yellow         gray     reset
-	console.log('\x1b[90m[\x1b[33mWARNING\x1b[90m]\x1b[0m ' + message);
+	//           gray     yellow      gray     reset
+	console.log('\x1b[90m[\x1b[33mWARN\x1b[90m]\x1b[0m ' + message);
 };
 
 /**
@@ -44,8 +44,8 @@ module.exports.warn = (message) => {
  * @returns undefined
  */
 module.exports.info = (message) => {
-	//              gray     purple      gray                     reset
-	console.log('   \x1b[90m[\x1b[34mINFO\x1b[90m] ' + message + '\x1b[0m');
+	//           gray     purple      gray                     reset
+	console.log('\x1b[90m[\x1b[34mINFO\x1b[90m] ' + message + '\x1b[0m');
 };
 
 /**
@@ -54,6 +54,6 @@ module.exports.info = (message) => {
  * @returns undefined
  */
 module.exports.error = (message) => {
-	//             gray     red          gray      red                    reset
-	console.log('  \x1b[90m[\x1b[31mERROR\x1b[90m] \x1b[31m' + message + '\x1b[0m');
+	//           gray     red          gray      red                    reset
+	console.log('\x1b[90m[\x1b[31mERROR\x1b[90m] \x1b[31m' + message + '\x1b[0m');
 };
