@@ -1,10 +1,11 @@
 const out = require('../../../out');
 const { MongoClient } = require('mongodb');
+require('dotenv').config();
 
 module.exports.execute = async (interaction) => {
 	const percentage = interaction.options.getInteger('percentage');
 	const guildId = interaction.guildId;
-	const uri = 'mongodb://127.0.0.1:27017'; // make sure you host mongodb on the default port (27017)
+	const uri = process.env.MONGO_URI ?? 'mongodb://127.0.0.1:27017';
 	const client = new MongoClient(uri);
 
 	try {

@@ -1,6 +1,7 @@
 const { Events } = require('discord.js');
 const { MongoClient } = require('mongodb');
 const perspective = require('../perspective');
+require('dotenv').config();
 
 module.exports = {
 	name: Events.MessageCreate,
@@ -8,7 +9,7 @@ module.exports = {
 	async execute(message) {
 		if (message.author.bot) return;
 
-		const uri = 'mongodb://127.0.0.1:27017'; // make sure you host mongodb on the default port (27017)
+		const uri = process.env.MONGO_URI ?? 'mongodb://127.0.0.1:27017';
 		const client = new MongoClient(uri);
 
 		let percentage = 0.7;
