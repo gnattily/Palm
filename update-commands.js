@@ -2,7 +2,7 @@ require('dotenv').config();
 const { REST, Routes } = require('discord.js');
 const fs = require('node:fs');
 const path = require('node:path');
-const out = require('./out');
+const out = require('./modules/out');
 
 const commands = [];
 // Grab all the command files from the commands directory you created earlier

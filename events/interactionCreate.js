@@ -1,5 +1,5 @@
 const { Events } = require('discord.js');
-const out = require('../out');
+const out = require('../modules/out');
 
 module.exports = {
 	name: Events.InteractionCreate,

@@ -9,15 +9,24 @@ const axios = require('axios').default;
  * @returns {Promise} The attributes requested and their scores
  */
 async function getScores(message, attributes) {
-	try {
+	if (message.length === 0) {
+		const out = {};
+		for (const attribute of attributes) {
+			out[attribute] = 0;
+		}
 
-		const raw = await axios.post(`https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze?key=${process.env.PERSPECTIVE_KEY}`, {
-			'comment': {
-	        	'text': message,
-	        },
-    	    'languages': ['en'],
-	        'requestedAttributes': formatAttributes(attributes),
-		}, { 'Content-Type': 'application/json' },
+		return out;
+	}
+
+	try {
+		const raw = await axios.post(`https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze?key=${process.env.PERSPECTIVE_KEY}`,
+			{
+				'comment': {
+		        	'text': message,
+		        },
+    		    'languages': ['en'],
+		        'requestedAttributes': formatAttributes(attributes),
+			}, { 'Content-Type': 'application/json' },
 		);
 
 		const out = {};
@@ -27,7 +36,6 @@ async function getScores(message, attributes) {
 		}
 
 		return out;
-
 	}
 	catch (error) {
 		console.error(error);

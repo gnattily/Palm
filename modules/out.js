@@ -57,3 +57,15 @@ module.exports.error = (message) => {
 	//           gray     red          gray      red                    reset
 	console.log('\x1b[90m[\x1b[31mERROR\x1b[90m] \x1b[31m' + message + '\x1b[0m');
 };
+
+module.exports.formatString = (str) => {
+	const words = str.split('_');
+
+	const formattedWords = words.map(word => {
+		const firstLetter = word.charAt(0).toUpperCase();
+		const restOfWord = word.slice(1).toLowerCase();
+		return firstLetter + restOfWord;
+	});
+
+	return formattedWords.join(' ');
+};
