@@ -1,16 +1,17 @@
 const { ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder } = require('discord.js');
+const { MongoClient } = require('mongodb');
 const formatString = require('../../modules/out').formatString;
 const interpolateColor = require('../../modules/interpolateColor');
 
 module.exports = async (message, channelid, attributes, scores, totalScore) => {
 	try {
-		sendWarningMessage(message, channelid, attributes, scores, totalScore);
+		await sendWarningMessage(message, channelid, attributes, scores, totalScore);
 	} catch (error) {
 		console.error(error);
 	}
 };
 
-function sendWarningMessage(message, channelid, attributes, scores, totalScore) {
+async function sendWarningMessage(message, channelid, attributes, scores, totalScore) {
 	const deleteMessage = new ButtonBuilder()
 		.setCustomId('deleteMessage')
 		.setLabel('Delete Message')
@@ -55,12 +56,27 @@ function sendWarningMessage(message, channelid, attributes, scores, totalScore) 
 		),
 	);
 
+
 	const channel = message.client.channels.cache.get(channelid);
-	channel.send({
+	const sentMessage = await channel.send({
 		content: '',
 		components: [row],
 		embeds: [embed],
 	});
+
+	const uri = process.env.MONGO_URI ?? 'mongodb://127.0.0.1:27017';
+	const client = new MongoClient(uri);
+
+	try {
+		const database = client.db('antitoxicity');
+		const config = database.collection('config');
+		const data = { _id: message.guildId, messages: {} };
+		data.messages[sentMessage.id] = { channelId: message.channel.id, messageId: message.id };
+
+		await config.updateOne({ _id: message.guildId }, { $set: data }, { upsert: true });
+	} finally {
+		client.close();
+	}
 }
 
 function roundPercentage(value) {
