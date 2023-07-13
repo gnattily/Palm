@@ -17,9 +17,9 @@ function rgbToHex(red, green, blue) {
 	const hexBlue = blue.toString(16).padStart(2, '0');
 
 	// Concatenate the individual hexadecimal components
-	const hexValue = `#${hexRed}${hexGreen}${hexBlue}`;
+	const hexValue = `${hexRed}${hexGreen}${hexBlue}`;
 
-	return hexValue;
+	return parseInt(hexValue, 16);
 }
 
 /**

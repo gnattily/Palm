@@ -1,6 +1,6 @@
 const { ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder } = require('discord.js');
 const { MongoClient } = require('mongodb');
-const formatString = require('../../modules/out').formatString;
+const { formatString } = require('../../modules/out');
 const interpolateColor = require('../../modules/interpolateColor');
 
 module.exports = async (message, channelid, attributes, scores, totalScore) => {
@@ -26,8 +26,8 @@ async function sendWarningMessage(message, channelid, attributes, scores, totalS
 		.addComponents(deleteMessage, jumpToMessage);
 
 	const embed = new EmbedBuilder()
-		.setTitle(`Unwanted message in ${message.channel}`)
-		.setDescription(`A message sent in ${message.channel} by ${message.author} may break server rules.`)
+		.setTitle('Message sent')
+		.setDescription(`A message sent in ${message.channel} by ${message.author} was flagged for \`${formatString(findHighestAttribute(attributes, scores))}\``)
 		.addFields(
 			{
 				name: 'Message',
@@ -70,10 +70,15 @@ async function sendWarningMessage(message, channelid, attributes, scores, totalS
 	try {
 		const database = client.db('antitoxicity');
 		const config = database.collection('config');
-		const data = { _id: message.guildId, messages: {} };
-		data.messages[sentMessage.id] = { channelId: message.channel.id, messageId: message.id };
 
-		await config.updateOne({ _id: message.guildId }, { $set: data }, { upsert: true });
+		try {
+			await config.updateOne({ _id: message.guildId }, { $set: { ['messages.' + sentMessage.id]: { channelId: message.channel.id, messageId: message.id } } });
+		} catch {
+			await config.insertOne({ _id: message.guildId, messages: { [sentMessage.id]: { channelId: message.channel.id, messageId: message.id } } }).catch((error) => {
+				console.error(error);
+			});
+		}
+
 	} finally {
 		client.close();
 	}
@@ -82,4 +87,18 @@ async function sendWarningMessage(message, channelid, attributes, scores, totalS
 function roundPercentage(value) {
 	const percentage = value * 100;
 	return Math.round(percentage * 10) / 10;
+}
+
+function findHighestAttribute(attributes, scores) {
+	let highest = 0;
+	let highestAttribute;
+
+	for (const attribute of attributes) {
+		if (scores[attribute] > highest) {
+			highest = scores[attribute];
+			highestAttribute = attribute;
+		}
+	}
+
+	return highestAttribute;
 }

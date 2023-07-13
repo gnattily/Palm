@@ -20,5 +20,5 @@ module.exports.execute = async (interaction) => {
 		await client.close();
 	}
 
-	await interaction.editReply(`Updated the percentage required for a message deletion to ${percentage}`);
+	await interaction.editReply(`Updated the percentage required for a message deletion to ${percentage}%`);
 };
