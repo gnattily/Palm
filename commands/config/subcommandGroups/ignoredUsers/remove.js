@@ -22,5 +22,5 @@ module.exports = async (interaction) => {
 	}
 
 	if (result.modifiedCount === 0) await interaction.editReply(`Could not remove ${user} as an ignored user, as they were never an ignored user`);
-	await interaction.editReply(`Removed ${user} as an ignored user`);
+	else await interaction.editReply(`Removed ${user} as an ignored user`);
 };

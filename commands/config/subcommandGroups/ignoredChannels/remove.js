@@ -22,5 +22,5 @@ module.exports = async (interaction) => {
 	}
 
 	if (result.modifiedCount === 0) await interaction.editReply(`Could not remove ${channel} as an ignored channel, as it was never an ignored channel`);
-	await interaction.editReply(`Removed ${channel} as an ignored channel`);
+	else await interaction.editReply(`Removed ${channel} as an ignored channel`);
 };

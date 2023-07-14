@@ -22,5 +22,5 @@ module.exports = async (interaction) => {
 	}
 
 	if (result.modifiedCount === 0) await interaction.editReply(`Could not find an attribute named \`${attribute}\` to delete`);
-	await interaction.editReply(`Removed testing for the \`${attribute}\` attribute`);
+	else await interaction.editReply(`Removed testing for the \`${attribute}\` attribute`);
 };
