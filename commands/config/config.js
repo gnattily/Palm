@@ -159,6 +159,34 @@ const data = new SlashCommandBuilder()
 							.setName('channel')
 							.setDescription('The user to remove')
 							.setRequired(true))))
+	.addSubcommandGroup(group =>
+		group
+			.setName('view')
+			.setDescription('View the current configuration')
+			.addSubcommand(subcommand =>
+				subcommand
+					.setName('percentage')
+					.setDescription('The percentage at which messages are deemed unwanted'))
+			.addSubcommand(subcommand =>
+				subcommand
+					.setName('autodelete')
+					.setDescription('Whether or not the bot will automatically deleted messages deemed unwanted'))
+			.addSubcommand(subcommand =>
+				subcommand
+					.setName('warn_mods')
+					.setDescription('Whether or not the bot will warn moderators and in which channel'))
+			.addSubcommand(subcommand =>
+				subcommand
+					.setName('attributes')
+					.setDescription('The attributes messages are scanned for'))
+			.addSubcommand(subcommand =>
+				subcommand
+					.setName('ignored_channels')
+					.setDescription('Which channels the bot will ignore'))
+			.addSubcommand(subcommand =>
+				subcommand
+					.setName('ignored_users')
+					.setDescription('Which users the bot will ignore')))
 	.setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild);
 
 module.exports = {

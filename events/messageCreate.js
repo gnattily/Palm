@@ -35,7 +35,7 @@ module.exports = {
 				if (guildConfig.autodelete) autodelete = guildConfig.autodelete;
 				if (guildConfig.warnMods) warnMods = guildConfig.warnMods;
 				if (guildConfig.warnChannel) warnChannel = guildConfig.warnChannel;
-				if (guildConfig.attributes) attributes = guildConfig.attributes;
+				if (guildConfig.attributes && guildConfig.attributes.length > 0) attributes = guildConfig.attributes;
 				if (guildConfig.ignoredChannels) ignoredChannels = guildConfig.ignoredChannels;
 				if (guildConfig.ignoredUsers) ignoredUsers = guildConfig.ignoredUsers;
 			}
