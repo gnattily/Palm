@@ -20,5 +20,5 @@ module.exports = async (interaction) => {
 		await client.close();
 	}
 
-	await interaction.editReply(`Added testing for the \`${attribute}\` attribute`);
+	await interaction.editReply(`Added testing for the \`${attribute}%\` attribute`);
 };
