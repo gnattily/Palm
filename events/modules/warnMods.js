@@ -1,7 +1,8 @@
 const { ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder } = require('discord.js');
-const { MongoClient } = require('mongodb');
 const { formatString } = require('../../modules/out');
 const interpolateColor = require('../../modules/interpolateColor');
+const { MongoClient } = require('mongodb');
+require('dotenv').config();
 
 module.exports = async (message, channelid, attributes, scores, totalScore) => {
 	try {
@@ -68,6 +69,7 @@ async function sendWarningMessage(message, channelid, attributes, scores, totalS
 	const client = new MongoClient(uri);
 
 	try {
+		await client.connect();
 		const database = client.db('antitoxicity');
 		const config = database.collection('config');
 

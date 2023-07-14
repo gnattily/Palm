@@ -1,14 +1,15 @@
 const { MongoClient } = require('mongodb');
 require('dotenv').config();
 
-module.exports.execute = async (interaction) => {
+module.exports = async (interaction) => {
 	const warnMods = interaction.options.getBoolean('warn_mods');
-	const channel = interaction.options.getChannel('channel');
+	let channel = interaction.options.getChannel('channel');
 	const guildId = interaction.guildId;
 	const uri = process.env.MONGO_URI ?? 'mongodb://127.0.0.1:27017';
 	const client = new MongoClient(uri);
 
 	try {
+		await client.connect();
 		const database = client.db('antitoxicity');
 		const config = database.collection('config');
 		const data = { _id: guildId, warnMods: warnMods };
@@ -18,10 +19,12 @@ module.exports.execute = async (interaction) => {
 		if (warnMods && !channel) {
 			const guildConfig = await config.findOne({ _id: data._id });
 
-			if (!guildConfig.channel) {
+			if (!guildConfig.warnChannel) {
 				await client.close;
 				await interaction.editReply('Please provide a channel');
 				return;
+			} else {
+				channel = guildConfig.warnChannel;
 			}
 		}
 

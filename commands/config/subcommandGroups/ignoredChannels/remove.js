@@ -2,18 +2,18 @@ const { MongoClient } = require('mongodb');
 require('dotenv').config();
 
 module.exports = async (interaction) => {
-	const autodelete = interaction.options.getBoolean('autodelete');
+	const channel = interaction.options.getChannel('channel');
 	const guildId = interaction.guildId;
 	const uri = process.env.MONGO_URI ?? 'mongodb://127.0.0.1:27017';
 	const client = new MongoClient(uri);
+	let result;
 
 	try {
 		await client.connect();
 		const database = client.db('antitoxicity');
 		const config = database.collection('config');
-		const data = { _id: guildId, autodelete: autodelete };
 
-		await config.updateOne({ _id: data._id }, { $set: data }, { upsert: true });
+		result = await config.updateOne({ _id: guildId }, { $pull: { ignoredChannels: channel.id } });
 	} catch (e) {
 		console.error(e);
 		return await interaction.editReply('Something went wrong. If this message persists, contact the bot\'s owner');
@@ -21,5 +21,6 @@ module.exports = async (interaction) => {
 		await client.close();
 	}
 
-	await interaction.editReply(`Turned ${autodelete ? 'on' : 'off'} automatic message deletion`);
+	if (result.modifiedCount === 0) await interaction.editReply(`Could not remove ${channel} as an ignored channel, as it was never an ignored channel`);
+	await interaction.editReply(`Removed ${channel} as an ignored channel`);
 };
