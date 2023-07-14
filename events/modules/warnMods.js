@@ -8,6 +8,7 @@ module.exports = async (message, channelid, attributes, scores, totalScore) => {
 	try {
 		await sendWarningMessage(message, channelid, attributes, scores, totalScore);
 	} catch (error) {
+		if (error.code === 50001) return;
 		console.error(error);
 	}
 };

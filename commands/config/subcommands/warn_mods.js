@@ -1,3 +1,4 @@
+const { PermissionsBitField } = require('discord.js');
 const { MongoClient } = require('mongodb');
 require('dotenv').config();
 
@@ -7,6 +8,11 @@ module.exports = async (interaction) => {
 	const guildId = interaction.guildId;
 	const uri = process.env.MONGO_URI ?? 'mongodb://127.0.0.1:27017';
 	const client = new MongoClient(uri);
+
+	// while this is not fool-proof (a user could give permissions, run the command, then remove them), it does provide the average user with some feedback
+	if (channel && !channel.permissionsFor(interaction.client.user).has(PermissionsBitField.FLAGS.SEND_MESSAGES)) {
+		return interaction.editReply('Cannot send messages in that channel. Please give the bot permission to view the channel and try again.');
+	}
 
 	try {
 		await client.connect();

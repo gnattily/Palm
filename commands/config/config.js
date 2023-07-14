@@ -59,7 +59,7 @@ const data = new SlashCommandBuilder()
 			.addChannelOption(option =>
 				option
 					.setName('channel')
-					.setDescription('The channel to warn moderators in')
+					.setDescription('The channel to warn moderators in (MUST permission to view/send messages)')
 					.addChannelTypes(ChannelType.GuildText)))
 	.addSubcommandGroup(group =>
 		group

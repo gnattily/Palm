@@ -52,7 +52,7 @@ module.exports = {
 			}
 
 			if (warnMods && warnChannel && highest >= percentage) {
-				sendWarning(message, warnChannel, attributes, scores, highest);
+				sendWarning(message, warnChannel, attributes, scores, highest).catch();
 			}
 
 			if (autodelete && highest >= percentage) message.delete();
