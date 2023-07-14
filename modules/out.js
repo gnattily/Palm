@@ -69,3 +69,8 @@ module.exports.formatString = (str) => {
 
 	return formattedWords.join(' ');
 };
+
+module.exports.roundPercentage = (value) => {
+	const percentage = value * 100;
+	return Math.round(percentage * 10) / 10;
+};

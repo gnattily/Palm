@@ -1,6 +1,6 @@
 const { ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder } = require('discord.js');
-const { formatString } = require('../../modules/out');
-const interpolateColor = require('../../modules/interpolateColor');
+const { formatString, roundPercentage } = require('../../modules/out');
+const { interpolateColor } = require('../../modules/interpolateColor');
 const { MongoClient } = require('mongodb');
 require('dotenv').config();
 
@@ -39,6 +39,13 @@ async function sendWarningMessage(message, channelid, attributes, scores, totalS
 				value: `${roundPercentage(totalScore)}% likely`,
 				inline: true,
 			},
+		)
+		.setColor(
+			interpolateColor(
+				[0x588157, 0x9a9835, 0xfcba03, 0xf77f00, 0xd62828],
+				[0, 0.4, 0.6, 0.70, 1],
+				totalScore,
+			),
 		);
 
 	attributes.forEach(attribute => {
@@ -48,15 +55,6 @@ async function sendWarningMessage(message, channelid, attributes, scores, totalS
 			inline: true,
 		});
 	});
-
-	embed.setColor(
-		interpolateColor(
-			[0x588157, 0x9a9835, 0xfcba03, 0xf77f00, 0xd62828],
-			[0, 0.4, 0.6, 0.70, 1],
-			totalScore,
-		),
-	);
-
 
 	const channel = message.client.channels.cache.get(channelid);
 	const sentMessage = await channel.send({
@@ -84,11 +82,6 @@ async function sendWarningMessage(message, channelid, attributes, scores, totalS
 	} finally {
 		client.close();
 	}
-}
-
-function roundPercentage(value) {
-	const percentage = value * 100;
-	return Math.round(percentage * 10) / 10;
 }
 
 function findHighestAttribute(attributes, scores) {

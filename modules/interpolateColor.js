@@ -105,5 +105,5 @@ function interpolateColor(colors, ratios, targetRatio) {
 	];
 }
 
-module.exports = interpolateColor;
+module.exports.interpolateColor = interpolateColor;
 module.exports.rgbToHex = rgbToHex;
