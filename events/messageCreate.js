@@ -17,25 +17,33 @@ module.exports = {
 		let autodelete = false;
 		let warnMods = false;
 		let warnChannel;
+		let attributes = ['TOXICITY'];
+		let ignoredChannels = [];
+		let ignoredUsers = [];
 
 		try {
+			await client.connect();
 			const database = client.db('antitoxicity');
 			const config = database.collection('config');
 
 			const guildConfig = await config.findOne({ _id: message.guild.id });
 
-			// make sure that if the guild does not have a percentage defined the value is not set
+			// if this doesn't work, encapsulate all the if statements in "if (guildConfig) {}"
 			// and it remains as 0.7 -- also, convert it to a decimal (0 to 1)
-			if (guildConfig && guildConfig.percentage) percentage = guildConfig.percentage / 100;
-			if (guildConfig && guildConfig.autodelete) autodelete = guildConfig.autodelete;
-			if (guildConfig && guildConfig.warnMods) warnMods = guildConfig.warnMods;
-			if (guildConfig && guildConfig.warnChannel) warnChannel = guildConfig.warnChannel;
+			if (guildConfig) {
+				if (guildConfig.percentage) percentage = guildConfig.percentage / 100;
+				if (guildConfig.autodelete) autodelete = guildConfig.autodelete;
+				if (guildConfig.warnMods) warnMods = guildConfig.warnMods;
+				if (guildConfig.warnChannel) warnChannel = guildConfig.warnChannel;
+				if (guildConfig.attributes) attributes = guildConfig.attributes;
+				if (guildConfig.ignoredChannels) ignoredChannels = guildConfig.ignoredChannels;
+				if (guildConfig.ignoredUsers) ignoredUsers = guildConfig.ignoredUsers;
+			}
 		} finally {
 			await client.close();
 		}
 
-		if (autodelete || warnMods) {
-			const attributes = ['TOXICITY', 'SEXUALLY_EXPLICIT', 'INSULT'];
+		if (autodelete || warnMods && !ignoredChannels.includes(message.channel.id) && !ignoredUsers.includes(message.author.id)) {
 			const scores = await perspective.getScores(message.content, attributes);
 
 			let highest = 0;

@@ -42,6 +42,7 @@ async function deleteMessage(interaction) {
 	let messageId;
 
 	try {
+		await client.connect();
 		const data = { _id: interaction.guildId };
 		const guildConfig = await config.findOne({ _id: data._id });
 
