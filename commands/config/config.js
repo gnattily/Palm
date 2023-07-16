@@ -3,6 +3,8 @@ const out = require('../../modules/out');
 
 // Perhaps sometime in the future this could be made to use a Collection like in index.js for commands, but this works for now and I'm not going to change it
 async function execute(interaction) {
+
+
 	await interaction.deferReply({ ephemeral: true });
 	const subcommand = interaction.options.getSubcommand();
 	const subcommandGroup = interaction.options.getSubcommandGroup();
@@ -27,6 +29,7 @@ async function execute(interaction) {
 const data = new SlashCommandBuilder()
 	.setName('config')
 	.setDescription('Configure the bot to your liking')
+	.setDMPermission(false)
 	.addSubcommand(subcommand =>
 		subcommand
 			.setName('percentage')
