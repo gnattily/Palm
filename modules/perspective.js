@@ -1,4 +1,3 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
 require('dotenv').config();
 const axios = require('axios').default;
 
@@ -22,11 +21,15 @@ async function getScores(message, attributes) {
 		const raw = await axios.post(`https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze?key=${process.env.PERSPECTIVE_KEY}`,
 			{
 				'comment': {
-		        	'text': message,
-		        },
-    		    'languages': ['en'],
-		        'requestedAttributes': formatAttributes(attributes),
-			}, { 'Content-Type': 'application/json' },
+					'text': message,
+				},
+				'languages': ['en'],
+				'requestedAttributes': formatAttributes(attributes),
+				'doNotStore': true,
+			},
+			{
+				'Content-Type': 'application/json',
+			},
 		);
 
 		const out = {};
