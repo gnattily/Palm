@@ -10,7 +10,7 @@ module.exports = async (interaction) => {
 	const client = new MongoClient(uri);
 
 	// while this is not fool-proof (a user could give permissions, run the command, then remove them), it does provide the average user with some feedback
-	if (channel && !channel.permissionsFor(interaction.client.user).has(PermissionsBitField.FLAGS.SEND_MESSAGES)) {
+	if (channel && !(channel.permissionsFor(interaction.client.user).has(PermissionsBitField.Flags.ViewChannel) && channel.permissionsFor(interaction.client.user).has(PermissionsBitField.Flags.SendMessages))) {
 		return interaction.editReply('Cannot send messages in that channel. Please give the bot permission to view the channel and try again.');
 	}
 
