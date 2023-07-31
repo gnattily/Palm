@@ -26,7 +26,7 @@ module.exports = {
 				}
 			}
 		} else if (interaction.isButton()) {
-			if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageMessages)) return interaction.reply({ ephemeral: true, content: 'Insufficient permissions' });
+			if (interaction.customId === 'deleteMessage' && !interaction.member.permissions.has(PermissionsBitField.Flags.ManageMessages)) return interaction.reply({ ephemeral: true, content: 'Insufficient permissions' });
 			if (interaction.customId === 'deleteMessage') deleteMessage(interaction);
 		}
 	},
