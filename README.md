@@ -24,7 +24,7 @@ To make Palm easier to use, we removed some attributes that were either redundan
 No. Palm cannot join nor listen to voice channels, nor can it scan the contents of images. For things like this, you're stuck with manual moderation.  
   
 #### Does Palm store my data?  
-Yes, but only things required to run the bot. Things such as message ids, channel ids, and configuration are all stored in Palm's database. Palm __does not__ store any analytics, member names, nor the content of messages. Palm will never give third-party access to _any_ of your information, even basic info. If you're still concerned, consider [[#Self Hosting|self hosting Palm]]. That being said, the content of your messages is send to Perspective's API for analysis. Although Palm adds a "do-not-store" flag with your message, we cannot guarantee that Perspective will not store your messages.
+Yes, but only things required to run the bot. Things such as message ids, channel ids, and configuration are all stored in Palm's database. Palm __does not__ store any analytics, member names, nor the content of messages. Palm will never give third-party access to _any_ of your information, even basic info. If you're still concerned, consider [self-hosting Palm](https://github.com/lGrom/antitoxicity-bot#self-hosting). That being said, the content of your messages is send to Perspective's API for analysis. Although Palm adds a "do-not-store" flag with your message, we cannot guarantee that Perspective will not store your messages.
   
 ### Self Hosting  
   
@@ -38,7 +38,7 @@ Yes, but only things required to run the bot. Things such as message ids, channe
 8. Enable the API, create an API key, and copy it into the `.env` file ([further instructions](https://developers.perspectiveapi.com/s/docs-enable-the-api))
 9. Set the Mongo URI to the default `mongodb://127.0.0.1:27017` or a custom URI (if you set up one)
 10. Before running the bot for the first time, run `npm run update`
-11. To run the bot, open two terminals in your bot's directory. Run `mongod --dbpath ./db` in one and `npm run start` in the other ^eb632f
+11. To run the bot, open two terminals in your bot's directory. Run `mongod --dbpath ./db` in one and `npm run start` in the other
 12. Return to your bot's page on the [Discord Developer Portal](https://discord.com/developers/applications) and navigate to the URL Generator in the OAuth2 tab
 13. Select the `bot` and `applications.commands` scopes, then select the following bot permissions:
 	1. Read Messages/View Channels
@@ -46,7 +46,7 @@ Yes, but only things required to run the bot. Things such as message ids, channe
 	4. Send Messages in Threads
 	5. Manage Messages
 14. Copy the generated URL into your browser and invite the bot to your Discord server
-15. You now have your own self-hosted bot. To run it in the future, repeat [[#^eb632f|step 11]]
+15. You now have your own self-hosted bot. To run it in the future, repeat step 11
   
 ### Further Questions  
   
