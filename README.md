@@ -1,6 +1,6 @@
 ## Palm  
   
-An anti-toxicity discord bot to ease moderation.  
+An anti-toxicity Discord bot to ease moderation.  
 
 ### About Palm  
   
@@ -31,7 +31,7 @@ Yes, but only things required to run the bot. Things such as message ids, channe
 1. Install the latest version of [node.js](https://nodejs.org)  
 2. Install the [MongoDB Community Server](https://www.mongodb.com/try/download/community) and ensure it's added to `PATH`
 3. Rename `.env_template` to `.env`, or duplicate the file and name it `.env`
-4. Create a discord bot account ([help](https://discord.com/developers/docs/getting-started#step-1-creating-an-app))
+4. Create a Discord bot account ([help](https://discord.com/developers/docs/getting-started#step-1-creating-an-app))
 5. Copy your bot's token (under the Bot tab) and client id (under the OAuth2 tab) into the `.env` file
 6. Enable the message content intent in the Bot tab
 7. Apply for a Perspective API token ([further instructions](https://developers.perspectiveapi.com/s/docs-get-started))
@@ -39,7 +39,7 @@ Yes, but only things required to run the bot. Things such as message ids, channe
 9. Set the Mongo URI to the default `mongodb://127.0.0.1:27017` or a custom URI (if you set up one)
 10. Before running the bot for the first time, run `npm run update`
 11. To run the bot, open two terminals in your bot's directory. Run `mongod --dbpath ./db` in one and `npm run start` in the other
-12. Return to your bot's page on the [Discord Developer Portal](https://discord.com/developers/applications) and navigate to the URL Generator in the OAuth2 tab
+12. Return to your bot's page on the [Discord Developer Portal](https://Discord.com/developers/applications) and navigate to the URL Generator in the OAuth2 tab
 13. Select the `bot` and `applications.commands` scopes, then select the following bot permissions:
 	1. Read Messages/View Channels
 	3. Send Messages
@@ -51,4 +51,4 @@ Yes, but only things required to run the bot. Things such as message ids, channe
 ### Further Questions  
   
 For any questions regarding something about Perspective, visit [their website](https://perspectiveapi.com).  
-For questions about the bot itself, ask in the [official Palm discord server](https://discord.gg/C8dXbvU92z). For any bugs/feature requests, create an issue.
+For questions about the bot itself, ask in the [official Palm Discord server](https://discord.gg/C8dXbvU92z). For any bugs/feature requests, create an issue.
