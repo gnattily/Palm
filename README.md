@@ -24,7 +24,7 @@ To make Palm easier to use, we removed some attributes that were either redundan
 No. Palm cannot join nor listen to voice channels, nor can it scan the contents of images. For things like this, you're stuck with manual moderation.  
   
 #### Does Palm store my data?  
-Yes, but only things required to run the bot. Things such as message ids, channel ids, and configuration are all stored in Palm's database. Palm __does not__ store any analytics, member names, nor the content of messages. Palm will never give third-party access to _any_ of your information, even basic info. If you're still concerned, consider [self-hosting Palm](https://github.com/lGrom/antitoxicity-bot#self-hosting). That being said, the content of your messages is send to Perspective's API for analysis. Although Palm adds a "do-not-store" flag with your message, we cannot guarantee that Perspective will not store your messages.
+Yes, but only things required to run the bot. Things such as message ids, channel ids, and configuration are all stored in Palm's database. Palm __does not__ store any analytics, member names, nor the content of messages. Palm will never give third-party access to _any_ of your information, even basic info. If you're still concerned, consider [self-hosting Palm](https://github.com/lGrom/antitoxicity-bot#self-hosting). That being said, the content of your messages is sent to Perspective's API for analysis. Although Palm adds a "do-not-store" flag with your message, we cannot guarantee that Perspective will not store your messages.
   
 ### Self Hosting  
   
