@@ -49,4 +49,5 @@ Yes, but only things required to run the bot. Things such as message ids, channe
 ## Further Questions
 
 For any questions regarding something about Perspective, visit [their website](https://perspectiveapi.com).
+
 For any bugs/feature requests, create an issue.
